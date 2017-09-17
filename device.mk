@@ -520,5 +520,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.enable=1﻿
 
+# Disable sdcardfs
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.sys.sdcardfs=false
+
 # Build gapps for now
 $(call inherit-product-if-exists, vendor/shamugapps/shamu-gapps.mk)
