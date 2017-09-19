@@ -389,4 +389,11 @@
     <integer name="config_bluetooth_rx_cur_ma">17</integer>
     <integer name="config_bluetooth_tx_cur_ma">46</integer>
     <integer name="config_bluetooth_operating_voltage_mv">3500</integer>
+
+    <!-- Do the battery/notification LEDs support pulsing?
+         Used to decide if we show pulse settings -->
+    <bool name="config_ledCanPulse">true</bool>
+ 
+    <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
+    <bool name="config_intrusiveNotificationLed">true</bool>
 </resources>
