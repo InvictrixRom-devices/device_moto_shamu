@@ -24,11 +24,11 @@ ENABLE_CPUSETS := true
 
 TARGET_NO_BOOTLOADER := true
 
-TARGET_KERNEL_CONFIG := six_defconfig
+TARGET_KERNEL_CONFIG := shamu_defconfig
 TARGET_KERNEL_SOURCE := kernel/moto/shamu
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.9/bin
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.8/bin
 
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE :=  2048
@@ -145,7 +145,7 @@ BOARD_USES_QC_TIME_SERVICES := true
 
 TARGET_FS_CONFIG_GEN += device/moto/shamu/config.fs
 
--include vendor/moto/shamu/BoardConfigVendor.mk
+-include vendor/invictus/config/BoardConfigInvictus.mk
 
 # Enable workaround for slow rom flash
 BOARD_SUPPRESS_SECURE_ERASE := true
