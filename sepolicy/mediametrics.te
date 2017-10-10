@@ -1,0 +1,1 @@
+allow mediametrics sysfs_devices_system_cpu:file { getattr open read };
