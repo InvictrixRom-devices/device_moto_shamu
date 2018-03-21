@@ -14,12 +14,7 @@
 # limitations under the License.
 #
 
-# This file includes all definitions that apply to ALL shamu devices, and
-# are also specific to shamu devices
-#
-# Everything in this directory will become public
-
-
+# Some init, fstab, and ueventd things specific to the Motorola/Google Nexus 6 (Shamu)
 PRODUCT_COPY_FILES += \
     device/moto/shamu/init.shamu.rc:root/init.shamu.rc \
     device/moto/shamu/init.shamu.power.rc:root/init.shamu.power.rc \
@@ -27,7 +22,7 @@ PRODUCT_COPY_FILES += \
     device/moto/shamu/fstab.shamu:root/fstab.shamu \
     device/moto/shamu/ueventd.shamu.rc:root/ueventd.shamu.rc
 
-# Input device files for shamu
+# Input device files for the Motorola/Google Nexus 6 (Shamu)
 PRODUCT_COPY_FILES += \
     device/moto/shamu/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
     device/moto/shamu/apq8084-taiko-tfa9890_stereo_co_Button_Jack.kl:system/usr/keylayout/apq8084-taiko-tfa9890_stereo_co_Button_Jack.kl \
@@ -54,7 +49,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
-# These are the hardware-specific features
+# Hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
@@ -82,7 +77,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml
 
-# For GPS
+# GPS
 PRODUCT_COPY_FILES += \
     device/moto/shamu/sec_config:system/etc/sec_config
 
@@ -101,7 +96,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/moto/shamu/bluetooth/BCM4356A2_001.003.015.0077.0214_ORC.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/bcm4354A2.hcd
 
-# For SPN display
+# SPN display
 PRODUCT_COPY_FILES += \
     device/moto/shamu/spn-conf.xml:system/etc/spn-conf.xml
 
@@ -233,7 +228,7 @@ PRODUCT_PACKAGES += \
     libqcomvoiceprocessing \
     libqcomvoiceprocessingdescriptors
 
-#CAMERA
+# Camera
 PRODUCT_PACKAGES += \
     android.hardware.camera.device@3.2-impl \
     android.hardware.camera.provider@2.4-impl \
@@ -244,10 +239,6 @@ PRODUCT_PACKAGES += \
     camera.msm8084 \
     mm-jpeg-interface-test \
     mm-qcamera-app
-
-#Snap Camera
-PRODUCT_PACKAGES += \
-    Snap
 
 PRODUCT_PACKAGES += \
     libion
@@ -260,11 +251,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     e2fsck
 
-# for off charging mode
+# Off charging mode
 PRODUCT_PACKAGES += \
     charger_res_images
 
-# for launcher layout
+# Launcher layout
 PRODUCT_PACKAGES += \
     ShamuLayout
 
@@ -295,7 +286,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.alt_mbn_name=tmo_alt.mbn \
     ro.com.android.prov_mobiledata=false
 
-# never dexopt the MotoSignature
+# Never dexopt the MotoSignature
 $(call add-product-dex-preopt-module-config,MotoSignatureApp,disable)
 
 # WiFi calling
@@ -308,7 +299,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.rcs.supported=0
 
-#Reduce IMS logging
+# Reduce IMS logging
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.ims.disableDebugLogs=1 \
     persist.ims.disableADBLogs=2 \
@@ -324,11 +315,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.sensor.debug=0 \
     vidc.debug.level=1
 
-#Disable QC Oem Hook
+# Disable QC Oem Hook
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.oem_socket=false
 
-#Support for graceful UICC Vltg supply deact
+# Support for graceful UICC Vltg supply deact
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.qcril_uim_vcc_feature=1
 
@@ -359,7 +350,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/moto/shamu/gps.conf:system/etc/gps.conf
 
-# GPS
+# For GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
     gps.msm8084
@@ -397,7 +388,7 @@ PRODUCT_COPY_FILES += \
     device/moto/shamu/init.shamu.diag.rc.user:root/init.shamu.diag.rc
 endif
 
-# Enable for volte call
+# Enable for VoLTE call
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -428,17 +419,17 @@ ifneq (,$(filter userdebug, $(TARGET_BUILD_VARIANT)))
     $(call add-product-dex-preopt-module-config,wifi-service,--generate-mini-debug-info)
 endif
 
-# setup dalvik vm configs.
+# Setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
-
+$(call inherit-product, frameworks/native/build/phone-xxxhdpi-3072-hwui-memory.mk)
 $(call inherit-product-if-exists, hardware/qcom/msm8x84/msm8x84.mk)
 $(call inherit-product-if-exists, vendor/qcom/gpu/msm8x84/msm8x84-gpu-vendor.mk)
 
-# setup dm-verity configs.
+# Setup dm-verity configs.
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/msm_sdcc.1/by-name/system
 $(call inherit-product, build/target/product/verity.mk)
 
-# setup scheduler tunable
+# Setup scheduler tunable
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.qualcomm.perf.cores_online=2
 
