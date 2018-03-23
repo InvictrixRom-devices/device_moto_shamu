@@ -18,25 +18,29 @@
 TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
 
-# Inherit from the common Invictrix configuration
-$(call inherit-product, vendor/invictrix/config/common.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# Inherit from the common open source product configuration
-$(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+$(call inherit-product, vendor/invictrix/config/common.mk)
+$(call inherit-product, vendor/invictrix/config/gsm.mk)
+
 $(call inherit-product, device/moto/shamu/device.mk)
 $(call inherit-product-if-exists, vendor/motorola/shamu/device-vendor.mk)
 
 # Device identifier (this must come after all other inclusions)
+PRODUCT_DEVICE := shamu
 PRODUCT_NAME := invictrix_shamu
 PRODUCT_BRAND := google
 PRODUCT_MODEL := Nexus 6
-
+PRODUCT_RELEASE_NAME := shamu
 TARGET_VENDOR := moto
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=shamu \
-    BUILD_FINGERPRINT=google/shamu/shamu:7.1.1/N6F27M/4299435:user/release-keys \
     PRIVATE_BUILD_DESC="shamu-user 7.1.1 N6F27M 4299435 release-keys"
+
+BUILD_FINGERPRINT := google/shamu/shamu:7.1.1/N6F27M/4299435:user/release-keys
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     DEVICE_MAINTAINERS="Michael S Corigliano (MikeCriggs)"
