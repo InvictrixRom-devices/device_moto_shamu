@@ -26,9 +26,6 @@ $(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/aosp_base_telephony.
 $(call inherit-product, device/moto/shamu/device.mk)
 $(call inherit-product-if-exists, vendor/motorola/shamu/device-vendor.mk)
 
-# Inherit from the AOSP device configuration (for the Motorola/Google Nexus 6 (Shamu)
-$(call inherit-product, device/moto/shamu/aosp_shamu.mk)
-
 # Device identifier (this must come after all other inclusions)
 PRODUCT_NAME := invictrix_shamu
 PRODUCT_BRAND := google
